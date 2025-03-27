@@ -62,6 +62,7 @@ public class App {
         try (CSVReader reader = new CSVReader(new FileReader("data.csv"))) {
             String[] nextLine;
             reader.readNext(); // Saltar cabecera
+            int total_product = 0;
             while ((nextLine = reader.readNext()) != null) {
                 Product product = new Product(
                         nextLine[6], // SKU
@@ -71,8 +72,9 @@ public class App {
                         nextLine[0] // CATEGORY
                 );
                 bst.insert(product);
+                total_product++;
             }
-            System.out.println("Datos cargados exitosamente desde el CSV.");
+            System.out.println("Datos cargados exitosamente desde el CSV. ["+total_product+"]");
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
